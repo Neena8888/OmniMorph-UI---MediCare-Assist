@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TraceLens UX - Real-time Usability Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- SAMPLE TEST INTERFACE -->
+    <header class="navbar">
+        <div class="logo">TraceLens <span>Demo</span></div>
+        <nav>
+            <a href="#services" class="trackable" data-label="Nav Services">Services</a>
+            <a href="#deals" class="trackable" data-label="Nav Deals">Deals</a>
+            <a href="#support" class="trackable" data-label="Nav Support">Support</a>
+        </nav>
+        <button class="btn btn-primary trackable" data-label="Login Button">Portal Login</button>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Seamless Travel, Intelligently Tracked</h1>
+            <p>Experience fast flight booking while TraceLens UX evaluates interaction friction in real time.</p>
+            <div class="cta-group">
+                <button class="btn btn-accent trackable" data-label="Book Flight CTA">Book a Flight</button>
+                <button class="btn btn-outline trackable" data-label="View Schedules CTA">View Schedules</button>
+            </div>
+        </section>
+
+        <section class="card-grid">
+            <div class="card trackable" data-label="Card Web Check-in">
+                <h3>Web Check-In</h3>
+                <p>Generate boarding passes 24 hours prior to scheduled departure.</p>
+                <button class="btn-sm trackable" data-label="Checkin Click">Proceed</button>
+            </div>
+            <div class="card trackable" data-label="Card Baggage Tracker">
+                <h3>Baggage Guide</h3>
+                <p>Inspect luggage weight allowances and domestic freight tariffs.</p>
+                <button class="btn-sm trackable" data-label="Baggage Info Click">Read Rules</button>
+            </div>
+            <div class="card trackable" data-label="Card Special Assistance">
+                <h3>Special Care</h3>
+                <p>Request wheelchair assistance and medical travel accommodations.</p>
+                <button class="btn-sm trackable" data-label="Assistance Request">Request</button>
+            </div>
+        </section>
+
+        <!-- Intentionally tricky button to test Rage Clicks -->
+        <section class="frustration-zone">
+            <h4>Usability Stress Test Zone</h4>
+            <p>Click the button below rapidly to trigger the Rage Click detection algorithm.</p>
+            <button class="btn btn-danger trackable" data-label="Laggy Submit Button" id="buggy-btn">Simulate Unresponsive Action</button>
+        </section>
+    </main>
+
+    <!-- TRACELENS UX FLOATING DASHBOARD -->
+    <aside class="tracelens-panel" id="tracelens-dashboard">
+        <div class="panel-header">
+            <div class="pulse-indicator"></div>
+            <h3>TraceLens UX <span>v1.0</span></h3>
+            <button id="toggle-heatmap" class="badge-btn"> View Heatmap</button>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-box">
+                <span class="metric-title">Active Time</span>
+                <span class="metric-val" id="time-display">00:00</span>
+            </div>
+            <div class="metric-box">
+                <span class="metric-title">Total Clicks</span>
+                <span class="metric-val" id="click-counter">0</span>
+            </div>
+            <div class="metric-box">
+                <span class="metric-title">Scroll Depth</span>
+                <span class="metric-val" id="scroll-display">0%</span>
+            </div>
+            <div class="metric-box warning">
+                <span class="metric-title">Rage Clicks</span>
+                <span class="metric-val" id="rage-counter">0</span>
+            </div>
+        </div>
+
+        <div class="log-section">
+            <div class="log-header">
+                <span>Real-Time Interaction Feed</span>
+                <button id="export-json" class="btn-link">Export UX Log</button>
+            </div>
+            <div class="log-feed" id="event-feed">
+                <div class="log-entry system">System initialized. Listening for UX events...</div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Heatmap Overlay Container -->
+    <div id="heatmap-canvas-container"></div>
+
+    <script src="tracker.js"></script>
+</body>
+</html>
