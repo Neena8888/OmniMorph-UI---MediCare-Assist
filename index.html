@@ -3,99 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TraceLens UX - Real-time Usability Tracker</title>
+    <title>MediCare Assist — Multimodal Adaptive Patient Portal</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="theme-default">
 
-    <!-- SAMPLE TEST INTERFACE -->
-    <header class="navbar">
-        <div class="logo">TraceLens <span>Demo</span></div>
-        <nav>
-            <a href="#services" class="trackable" data-label="Nav Services">Services</a>
-            <a href="#deals" class="trackable" data-label="Nav Deals">Deals</a>
-            <a href="#support" class="trackable" data-label="Nav Support">Support</a>
-        </nav>
-        <button class="btn btn-primary trackable" data-label="Login Button">Portal Login</button>
+    <!-- Top Navigation Header -->
+    <header class="top-nav" id="top-nav">
+        <div class="brand">
+            <span class="brand-name">MediCare <strong>Assist</strong></span>
+            <span class="brand-badge">Adaptive Triage Portal</span>
+        </div>
+
+        <!-- Modality Controller -->
+        <div class="modality-switch" role="tablist">
+            <button class="mode-pill active" id="btn-manual" role="tab">Keyboard & Mouse</button>
+            <button class="mode-pill" id="btn-voice" role="tab">Voice Assistant</button>
+            <button class="mode-pill" id="btn-ambient" role="tab">Ambient Sensor</button>
+        </div>
     </header>
 
-    <main class="container">
-        <section class="hero">
-            <h1>Seamless Travel, Intelligently Tracked</h1>
-            <p>Experience fast flight booking while TraceLens UX evaluates interaction friction in real time.</p>
-            <div class="cta-group">
-                <button class="btn btn-accent trackable" data-label="Book Flight CTA">Book a Flight</button>
-                <button class="btn btn-outline trackable" data-label="View Schedules CTA">View Schedules</button>
+    <!-- Main Workspace -->
+    <main class="main-wrapper">
+
+        <!-- System Context & Live Speech Feedback -->
+        <div class="feedback-card" id="feedback-card">
+            <div class="feedback-status">
+                <span class="status-indicator-dot" id="voice-dot"></span>
+                <span class="status-msg" id="system-status">System Ready: Standard Input Mode</span>
             </div>
+            <div class="transcript-box" id="transcript-display">Listening feed: Ready for interaction...</div>
+        </div>
+
+        <!-- Adaptive Ergonomics Bar (HCI Control Deck) -->
+        <div class="adaptive-bar" id="adaptive-bar">
+            <span class="bar-title">Interface Adaptations:</span>
+            <div class="bar-actions">
+                <button class="adapt-chip" id="toggle-contrast">High Contrast (AAA)</button>
+                <button class="adapt-chip" id="toggle-focus">Focus View</button>
+                <button class="adapt-chip" id="toggle-font">Large Accessible Type</button>
+                <button class="adapt-chip reset" id="reset-ui">Reset Layout</button>
+            </div>
+        </div>
+
+        <!-- Real Clinical Patient Intake Form -->
+        <section class="form-container" id="form-container">
+            <div class="form-meta">
+                <h2>Emergency & Outpatient Registration</h2>
+                <p>Register incoming patient details. Accessible via keyboard, screen reader, or hands-free voice commands.</p>
+            </div>
+
+            <form id="patient-form" onsubmit="return false;">
+                <!-- Full Name Field -->
+                <div class="field-row">
+                    <div class="label-wrapper">
+                        <label for="patient-name">Patient Full Name</label>
+                        <span class="hint-tag">Voice: "Set name [Name]"</span>
+                    </div>
+                    <input type="text" id="patient-name" placeholder="e.g. Raheela Daud" autocomplete="off">
+                </div>
+
+                <!-- Urgency & Department Fields -->
+                <div class="two-col-grid">
+                    <div class="field-row">
+                        <div class="label-wrapper">
+                            <label for="urgency-level">Triage Urgency</label>
+                            <span class="hint-tag">Voice: "Priority Urgent / Routine"</span>
+                        </div>
+                        <select id="urgency-level">
+                            <option value="Routine">Standard / Routine Care</option>
+                            <option value="Urgent">Priority Urgent</option>
+                            <option value="Critical">Critical Emergency</option>
+                        </select>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="label-wrapper">
+                            <label for="dept-select">Clinical Department</label>
+                            <span class="hint-tag">Voice: "Department Cardiology / General"</span>
+                        </div>
+                        <select id="dept-select">
+                            <option value="General Outpatient">General Outpatient</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="Neurology">Neurology</option>
+                            <option value="Trauma Care">Trauma & Emergency</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Clinical Symptoms/Dictation -->
+                <div class="field-row">
+                    <div class="label-wrapper">
+                        <label for="clinical-notes">Chief Complaint / Clinical Notes</label>
+                        <span class="hint-tag">Voice: "Symptom [Details]"</span>
+                    </div>
+                    <textarea id="clinical-notes" rows="3" placeholder="Describe symptoms or dictate diagnosis..."></textarea>
+                </div>
+
+                <!-- Form Controls -->
+                <div class="button-row">
+                    <button class="btn-action primary" id="btn-submit">Complete Triage Submission</button>
+                    <button class="btn-action secondary" id="btn-clear">Clear Record</button>
+                </div>
+            </form>
         </section>
 
-        <section class="card-grid">
-            <div class="card trackable" data-label="Card Web Check-in">
-                <h3>Web Check-In</h3>
-                <p>Generate boarding passes 24 hours prior to scheduled departure.</p>
-                <button class="btn-sm trackable" data-label="Checkin Click">Proceed</button>
-            </div>
-            <div class="card trackable" data-label="Card Baggage Tracker">
-                <h3>Baggage Guide</h3>
-                <p>Inspect luggage weight allowances and domestic freight tariffs.</p>
-                <button class="btn-sm trackable" data-label="Baggage Info Click">Read Rules</button>
-            </div>
-            <div class="card trackable" data-label="Card Special Assistance">
-                <h3>Special Care</h3>
-                <p>Request wheelchair assistance and medical travel accommodations.</p>
-                <button class="btn-sm trackable" data-label="Assistance Request">Request</button>
-            </div>
-        </section>
+        <!-- Exit Focus Mode Floating Button -->
+        <button class="exit-focus-btn" id="exit-focus-btn">Exit Focus View</button>
 
-        <!-- Intentionally tricky button to test Rage Clicks -->
-        <section class="frustration-zone">
-            <h4>Usability Stress Test Zone</h4>
-            <p>Click the button below rapidly to trigger the Rage Click detection algorithm.</p>
-            <button class="btn btn-danger trackable" data-label="Laggy Submit Button" id="buggy-btn">Simulate Unresponsive Action</button>
-        </section>
+        <!-- Command Documentation Dock -->
+        <footer class="command-cheatsheet" id="command-cheatsheet">
+            <span class="cheatsheet-heading">Available Hands-Free Voice Commands:</span>
+            <div class="command-grid">
+                <span><code>"Set name [Name]"</code></span>
+                <span><code>"Priority urgent"</code></span>
+                <span><code>"Department cardiology"</code></span>
+                <span><code>"Symptom chest pain"</code></span>
+                <span><code>"High contrast"</code></span>
+                <span><code>"Focus mode"</code></span>
+                <span><code>"Large font"</code></span>
+                <span><code>"Submit"</code></span>
+                <span><code>"Clear"</code></span>
+            </div>
+        </footer>
+
     </main>
 
-    <!-- TRACELENS UX FLOATING DASHBOARD -->
-    <aside class="tracelens-panel" id="tracelens-dashboard">
-        <div class="panel-header">
-            <div class="pulse-indicator"></div>
-            <h3>TraceLens UX <span>v1.0</span></h3>
-            <button id="toggle-heatmap" class="badge-btn"> View Heatmap</button>
-        </div>
-
-        <div class="metrics-grid">
-            <div class="metric-box">
-                <span class="metric-title">Active Time</span>
-                <span class="metric-val" id="time-display">00:00</span>
-            </div>
-            <div class="metric-box">
-                <span class="metric-title">Total Clicks</span>
-                <span class="metric-val" id="click-counter">0</span>
-            </div>
-            <div class="metric-box">
-                <span class="metric-title">Scroll Depth</span>
-                <span class="metric-val" id="scroll-display">0%</span>
-            </div>
-            <div class="metric-box warning">
-                <span class="metric-title">Rage Clicks</span>
-                <span class="metric-val" id="rage-counter">0</span>
-            </div>
-        </div>
-
-        <div class="log-section">
-            <div class="log-header">
-                <span>Real-Time Interaction Feed</span>
-                <button id="export-json" class="btn-link">Export UX Log</button>
-            </div>
-            <div class="log-feed" id="event-feed">
-                <div class="log-entry system">System initialized. Listening for UX events...</div>
-            </div>
-        </div>
-    </aside>
-
-    <!-- Heatmap Overlay Container -->
-    <div id="heatmap-canvas-container"></div>
-
-    <script src="tracker.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
